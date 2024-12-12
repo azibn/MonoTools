@@ -5,7 +5,6 @@ import pandas as pd
 import pickle
 import os
 import gzip
-
 from copy import deepcopy
 from datetime import datetime
 
@@ -539,7 +538,7 @@ class lc():
         #setattr(self, 'bin_cadence',binlc['flux'][:,0])
 
         #Initialising mask to use:
-        if extramask is not None and type(extramask)==np.ndarray and (type(extramask[0])==bool)|(type(extramask[0])==np.bool_) and use_masked:
+        if (extramask is not None and isinstance(extramask, np.ndarray) and (isinstance(extramask[0], bool) or isinstance(extramask[0], np.bool_)) and use_masked):
             mask=(self.mask&extramask).astype(bool)
         elif use_masked:
             if not hasattr(self,'mask'):
@@ -1087,7 +1086,7 @@ class multilc(lc):
             else:
                 sect_obs=tools.observed(int(id))
             #print({key:sect_obs[key] for key in epoch.index})
-            epochs=[key for key in epoch.index if sect_obs[key]]
+            epochs=[key for key in epoch.index if key in sect_obs and sect_obs[key]]
 
             if epochs==[]:
                 #NO EPOCHS OBSERVABLE APPARENTLY. USING THE EPOCHS ON EXOFOP/TIC8
@@ -1599,7 +1598,7 @@ class multilc(lc):
                                         'xs_ap_flux':np.hstack([fi[1].data['KSPSAP_FLUX_SML'] for fi in f])},
                                 flux_errs={'flux_err':np.hstack([fi[1].data['KSPSAP_FLUX_ERR'] for fi in f])},
                                 src='qlp',mission='tess', jd_base=2457000, flx_system='elec', sect=sect, 
->>>>>>> 1e01c6c5895b45d57b6eb4ae5b87d885c98225b0
+
                                 cent1=np.hstack([fi[1].data['SAP_X'] for fi in f]), cent2=np.hstack([fi[1].data['SAP_Y'] for fi in f]))
                     return ilc
 

@@ -35,7 +35,7 @@ import requests
 import httplib2
 from lxml import html
 import importlib
-
+import tess_stars2px
 import glob
 
 
@@ -762,7 +762,7 @@ def observed(tic,radec=None,maxsect=84):
     # Using either "webtess" page or Chris Burke's tesspoint to check if TESS object was observed:
     # Returns dictionary of each sector and whether it was observed or not
     
-    tess_stars2px = importlib.import_module("tess-point.tess_stars2px")
+    tess_stars2px = importlib.import_module("tess_stars2px")
     #from tesspoint import tess_stars2px_function_entry as tess_stars2px
     result = tess_stars2px.tess_stars2px_function_entry(tic, radec.ra.deg, radec.dec.deg)
     sectors = result[3]
@@ -1291,7 +1291,7 @@ def lcBin(lc,binsize=1/48,split_gap_size=0.8,use_flat=True,use_masked=True, use_
         loop_blocks=np.array_split(np.arange(len(lc['time'])),np.where(np.diff(lc['time'])>2.0)[0])
     else:
         loop_blocks=[np.arange(len(lc['time']))]
-    if extramask is not None and type(extramask)==np.ndarray and (type(extramask[0])==bool)|(type(extramask[0])==np.bool_):
+    if extramask is not None and isinstance(extramask, np.ndarray) and (isinstance(extramask[0], bool) or isinstance(extramask[0], np.bool_)):
         mask=lc['mask']&extramask
     else:
         mask=lc['mask']
@@ -1997,7 +1997,7 @@ def kepler_spline(time, flux, flux_mask = None, transit_mask = None, bk_space=1.
         ispline = None
 
         # Mask indicating the points used to fit the spline.
-        imask = np.ones_like(time[ix], dtype=np.bool)
+        imask = np.ones_like(time[ix], dtype=np.bool_)
         imask = imask*flux_mask[ix] if flux_mask is not None else imask
         imask = imask*transit_mask[ix] if transit_mask is not None else imask
 

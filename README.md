@@ -34,6 +34,30 @@ MonoTools will look at the `$MONOTOOLSPATH` bash variable as the location to sto
 
 Mac OSX users may need to make sure GCC is correctly installed (.e.g with `brew install gcc`) and C libraries are present.
 
+
+### Installation updates
+If you are running ARM (M1 or newer) machines, the installation might run into a few issues. To go around this, create an environment using `osx-64`. Below is an example:
+
+```
+micromamba env create -n monotools --platform osx-64 python=3.8
+```
+
+then:
+
+```
+pip install .
+```
+
+followed by 
+
+```
+python setup.py install
+python setup.py build
+```
+
+
+
+
 #### Using MonoTools
 
 For a tutorial on how to deal with the in-built lightcurve class, see [using_lightcurve.ipynb](https://github.com/hposborn/MonoTools/blob/main/docs/using_lightcurve.html).
