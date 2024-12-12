@@ -67,7 +67,8 @@ setuptools.setup(
                       'myst_parser',
                       'sphinx_rtd_theme',
                       'tess-point',
-                      'everest',
+                      'typing_extensions==3.10.0',
+		      'anyio==3.7.1',
                       ],
     classifiers=[
         'Development Status :: 1 - Planning',
