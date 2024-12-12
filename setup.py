@@ -65,7 +65,7 @@ setuptools.setup(
                       'sphinx',
                       'nbsphinx',
                       'myst_parser',
-                      'sphinx_rtd_theme'
+                      'sphinx_rtd_theme',
                       'tess-point',
                       'everest',
                       ],
