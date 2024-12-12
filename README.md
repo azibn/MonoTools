@@ -36,7 +36,7 @@ Mac OSX users may need to make sure GCC is correctly installed (.e.g with `brew 
 
 
 ### Installation updates
-If you are running ARM (M1 or newer) machines, the installation might run into a few issues. To go around this, create an environment using `osx-64`. Below is an example:
+If you are running ARM (M1 or newer) machines, the installation might run into a few issues. To go around this, create an environment using `osx-64`. Below is an example using micromamba:
 
 ```
 micromamba env create -n monotools --platform osx-64 python=3.8
@@ -55,6 +55,7 @@ python setup.py install
 python setup.py build
 ```
 
+If any other packages cannot be installed, it would be best to install them individually, followed by the `setup.py` commands.
 
 
 
